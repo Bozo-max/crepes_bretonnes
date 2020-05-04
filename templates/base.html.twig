@@ -6,7 +6,11 @@
   </head>
   <body>
     <header>
-      {% block header %}Crepes bretonnes{% endblock %}
+      {% load static %}
+      {% block header %}
+        <h1>Crepes bretonnes</h1>
+        <img src="{% static 'img/header.png' %}" alt="mon header">
+      {% endblock %}
     </header>
 
     <nav>
