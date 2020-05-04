@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Les crepes bretonnes{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      {% block header %}Crepes bretonnes{% endblock %}
+    </header>
+
+    <nav>
+      {% block nav %}
+      <ul>
+        <li> <a href="/">Accueil</a></li>
+        <li><a href='{% url 'home' %}'>Blog</a></li>
+        <li> <a href="/contact">Contact</a></li>
+      </ul>
+      {% endblock %}
+    </nav>
+
+    <section id='content'>
+      {% block content %}{% endblock %}
+    </section>
+
+    <footer>&copy; Crepes bretonnes</footer>
+  </body>
+</html>

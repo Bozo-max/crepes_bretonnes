@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Addition | {{ block.super }} {% endblock %}
+
+{% block content %}
+    <p>{{x}}+{{y}}={{res}}</p>
+    <p>Vous avez {{x}} chev{{x|pluralize:"al,aux"}}</p>
+{% endblock %}
