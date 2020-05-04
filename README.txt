@@ -1,2 +1,1 @@
-Hello ici le master
-je suis le master
+MOOC d'OC pour apprendre Django
