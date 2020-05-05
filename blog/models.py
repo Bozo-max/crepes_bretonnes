@@ -11,11 +11,11 @@ class Article(models.Model):
     slug = models.SlugField(max_length=100)
 
     class Meta:
-        verbose_name = "un article"
+        verbose_name = "Article"
         ordering = ['date']
 
-        def __string__(self):
-            return self.titre
+    def __str__(self):
+        return self.titre
 
 class Categorie(models.Model):
     name = models.CharField(max_length=100)
