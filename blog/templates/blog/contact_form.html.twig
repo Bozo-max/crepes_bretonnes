@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+{% if sauvegarde %}
+<p>Le contact a été enregistré !</p>
+{% endif %}
+
+<form class="" action="{% url 'contact_form' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" name="" value="Valider">
+</form>
+{% endblock %}

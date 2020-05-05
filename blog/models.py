@@ -27,3 +27,11 @@ class Categorie(models.Model):
     def __str__(self):
 
         return self.name
+
+class Contact(models.Model):
+    nom = models.CharField(max_length=100)
+    adresse = models.CharField(max_length = 255)
+    image = models.ImageField(upload_to = 'photos/')
+
+    def __str__(self):
+        return self.nom
