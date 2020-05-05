@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 class Article(models.Model):
@@ -16,9 +17,13 @@ class Article(models.Model):
 
     def __str__(self):
         return self.titre
+    def save(self, *args, **kwargs):
+        self.slug = slugify('%s-%s'%(str(self.date), self.titre))
+        super().save(*args, **kwargs)
 
 class Categorie(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
+
         return self.name

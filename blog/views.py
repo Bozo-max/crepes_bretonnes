@@ -1,13 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.urls import reverse
+from django.utils.text import slugify
+
 from datetime import datetime
 from blog.models import Article
+from .forms import ArticleForm
 
 def home(request):
     articles = Article.objects.all()
 
     return render(request, 'blog/home.html.twig',locals())
+
+def contact(request):
+    form = ArticleForm(request.POST or None)
+
+    if form.is_valid():
+        article = form.save()
+        return redirect('display_article',article.id)
+
+    return render(request, 'blog/contact.html.twig', locals())
 
 def read_article(request, id):
     article = get_object_or_404(Article, id=id)
