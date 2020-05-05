@@ -17,9 +17,13 @@ def contact(request):
 
     if form.is_valid():
         article = form.save()
-        return redirect('display_article',article.id)
+        return redirect('article_by_slug',article.slug)
 
     return render(request, 'blog/contact.html.twig', locals())
+
+def read_article_by_slug(request, slug):
+    article = get_object_or_404(Article, slug=slug)
+    return render(request, 'blog/read.html.twig', {'article':article})
 
 def read_article(request, id):
     article = get_object_or_404(Article, id=id)
