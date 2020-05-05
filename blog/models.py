@@ -8,6 +8,7 @@ class Article(models.Model):
     content = models.TextField(null = True)
     date = models.DateTimeField(default = timezone.now, verbose_name = "Date de parution")
     categorie = models.ForeignKey('Categorie', on_delete = models.CASCADE)
+    slug = models.SlugField(max_length=100)
 
     class Meta:
         verbose_name = "un article"
