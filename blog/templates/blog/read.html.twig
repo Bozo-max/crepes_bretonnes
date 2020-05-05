@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h1><strong>{{article.titre}}</strong> par {{article.auteur}} le <em>{{article.date|date:'DATE_FORMAT'}}</em></h1>
+<p>{{article.content}}</p>
+{% endblock %}
