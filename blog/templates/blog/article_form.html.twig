@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<form class="" action="{% url 'contact_form'%}" method="post">
+<form class="" action="{% url 'article_form'%}" method="post">
   {% csrf_token %}
   {{form.as_p}}
   <input type="submit" name="" value="Valider">

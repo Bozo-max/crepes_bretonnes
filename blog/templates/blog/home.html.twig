@@ -4,7 +4,7 @@
   {% for article in articles %}
     <h2> <strong>{{article.titre}}</strong> par {{article.auteur}} le <em>{{article.date|date:'DATE_FORMAT'}}</em> </h2>
     <br><hr>
-    <p>{{article.content|truncatechars_html:80}} <a href="{% url 'read_article' article.id %}">Lire plus</a> </p>
+    <p>{{article.content|truncatechars_html:80}} <a href="{% url 'display_article' article.id %}">Lire plus</a> </p>
     {% empty %}
     <p>Pas encore d'article</p>
   {% endfor %}

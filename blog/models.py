@@ -18,7 +18,8 @@ class Article(models.Model):
     def __str__(self):
         return self.titre
     def save(self, *args, **kwargs):
-        self.slug = slugify('%s-%s'%(self.date.strftime('%Y%m%d%H%M%S'), self.titre))
+        super().save(*args, **kwargs)
+        self.slug = slugify("%d-%s"%(self.id, self.titre))
         super().save(*args, **kwargs)
 
 class Categorie(models.Model):
