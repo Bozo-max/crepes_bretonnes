@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
 
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from datetime import datetime
 from blog.models import Article
@@ -13,6 +13,16 @@ from .forms import ArticleForm, ContactForm
 #     articles = Article.objects.all()
 #
 #     return render(request, 'blog/home.html.twig',locals())
+
+class DeleteArticle(DeleteView):
+    model = Article
+    template_name = 'blog/delete_article.html.twig'
+    context_object_name = 'article'
+    success_url = reverse_lazy('home')
+
+    def get_object(self, queryset = None):
+        slug = self.kwargs['slug']
+        return get_object_or_404(Article, slug = slug)
 
 class DetailArticle(DetailView):
     model = Article

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h1>Supprimer {{article.titre}}</h1>
+<p> Etes-vous sûr de vouloir supprimer cet article ?</p>
+<form class="" action="" method="post">
+  {% csrf_token %}
+  <input type="submit" name="" value="Oui, supprimer">
+  <a href="{% url 'home' %}">Finalement, non</a>
+</form>
+
+
+{% endblock %}
