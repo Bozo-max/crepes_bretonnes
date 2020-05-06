@@ -13,7 +13,7 @@ class Article(models.Model):
 
     class Meta:
         verbose_name = "Article"
-        ordering = ['date']
+        ordering = ['-date']
 
     def __str__(self):
         return self.titre

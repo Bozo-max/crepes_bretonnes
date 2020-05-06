@@ -1,16 +1,45 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
+
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 from datetime import datetime
 from blog.models import Article
 from .forms import ArticleForm, ContactForm
 
-def home(request):
-    articles = Article.objects.all()
+# def home(request):
+#     articles = Article.objects.all()
+#
+#     return render(request, 'blog/home.html.twig',locals())
 
-    return render(request, 'blog/home.html.twig',locals())
+class DetailArticle(DetailView):
+    model = Article
+    template_name = 'blog/read.html.twig'
+
+class CreateArticle(CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'blog/article_form.html.twig'
+    success_url = reverse_lazy('home')
+
+class UpdateArticle(UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'blog/article_form.html.twig'
+    success_url = reverse_lazy('home')
+
+    def get_object(self, queryset = None):
+        slug = self.kwargs['slug']
+        return get_object_or_404(Article, slug = slug)
+
+class ListArticle(ListView):
+    template_name = 'blog/home.html.twig'
+    model = Article
+    context_object_name = 'articles'
+    paginate_by = 5
+
 
 
 def article_form(request):
@@ -41,13 +70,6 @@ def addition(request, x, y):
     res = x+y
     return render(request, 'blog/addition.html.twig', locals())
 
-
-def view_article(request, id_article):
-    if id_article >100:
-        raise Http404
-    elif id_article == 88:
-        return redirect('home')
-    return HttpResponse('<h1> Voici l\'article numéro %d !'%(id_article))
 
 
 def contact_form(request):
