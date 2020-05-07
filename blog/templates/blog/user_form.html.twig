@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  <h1>Ajouter un utilisateur :</h1>
+
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" name="" value="Ajouter l'utilisateur">
+  </form>
+{% endblock %}
