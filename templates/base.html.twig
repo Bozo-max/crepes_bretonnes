@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load blog_extras %}
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -8,7 +9,9 @@
     <header>
       {% load static %}
       {% block header %}
-        <h1>Crepes bretonnes</h1>
+        <h1>{{"Crepes bretonnes"|citation}}</h1>
+        <h1>{{"Bonjour tout le monde "|smart_truncate:14}}</h1>
+        <p>{% random 5 9 %}</p>
         <!-- <img src="{% static 'img/header.png' %}" alt="mon header"> -->
       {% endblock %}
     </header>

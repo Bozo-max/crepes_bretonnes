@@ -36,3 +36,14 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.nom
+
+
+class Lieu(models.Model):
+    adresse = models.CharField(max_length = 255)
+    nom = models.CharField(max_length = 100)
+
+    def __str__(self):
+        return self.nom
+
+class Restaurant(Lieu):
+    menu = models.TextField()
