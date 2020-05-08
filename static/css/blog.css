@@ -1,0 +1,20 @@
+article
+{
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px black;
+}
+
+.article_title
+{
+  margin-top:1px;
+  text-align: center;
+  font-size: 1.2em;
+  border-bottom: 1px solid grey;
+}
+
+.article_content
+{
+  font-size: 1em;
+  margin: 5px;
+}

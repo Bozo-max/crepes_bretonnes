@@ -4,9 +4,11 @@
 
   <p> <a href="{% url 'article_form' %}">Ajouter un article</a> </p>
   {% for article in articles %}
-    <h2> <strong>{{article.titre}}</strong> par {{article.auteur}} le <em>{{article.date|date:'DATE_FORMAT'}}</em> </h2>
-    <br><hr>
-    <p>{{article.content|truncatechars_html:80}} <a href="{% url 'article_by_slug' article.slug %}">Lire plus</a> </p>
+    <article class="article">
+      <h2 class = 'article_title'> <strong>{{article.titre}}</strong> par {{article.auteur}} le <em>{{article.date|date:'DATE_FORMAT'}}</em> </h2>
+      <div class = 'article_content'>{{article.content|truncatechars_html:80}} <a href="{% url 'article_by_slug' article.slug %}">Lire plus</a> </div>
+    </article>
+    {% if not forloop.last %}<br><br>{% endif %}
     {% empty %}
     <p>Pas encore d'article</p>
   {% endfor %}

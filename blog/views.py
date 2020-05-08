@@ -50,7 +50,7 @@ class ListArticle(ListView):
     template_name = 'blog/home.html.twig'
     model = Article
     context_object_name = 'articles'
-    paginate_by = 5
+    paginate_by = 10
 
 def article_form(request):
     form = ArticleForm(request.POST or None)

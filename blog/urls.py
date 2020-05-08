@@ -9,7 +9,7 @@ from .views import ListArticle, CreateArticle, UpdateArticle, \
 
 urlpatterns = [
 #    path('home', views.home, name = 'home'),
-    path('home', login_required(ListArticle.as_view()), name = 'home'),
+    path('home', ListArticle.as_view(), name = 'home'),
     path('article/<int:id>', views.read_article, name = 'display_article'),
     path('article/<slug:slug>', DetailArticle.as_view(), name = 'article_by_slug'),
     path('delete/<slug:slug>', DeleteArticle.as_view(), name = 'delete_article'),

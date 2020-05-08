@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 {% load blog_extras %}
+{% load static %}
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}Les crepes bretonnes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/blog.css" %}">
   </head>
   <body>
     <header>
-      {% load static %}
       {% block header %}
-        <h1>{{"Crepes bretonnes"|citation}}</h1>
-        <h1>{{"Bonjour tout le monde "|smart_truncate:14}}</h1>
-        <p>{% random 5 9 %}</p>
-        <!-- <img src="{% static 'img/header.png' %}" alt="mon header"> -->
+        <h1 class = "main_title">Crêpes Bretonnes</h1>
+        <div class="login_logout">
+          {% if user.is_authenticated %}
+            Connecté en tant que {{user.username}} <br> <a href="{% url 'logout' %}">Se déconnecter</a>
+          {% else %}
+            <a href="{% url 'register' %}">S'inscrire</a> <a href="{% url 'login' %}">Se connecter</a>
+          {% endif %}
+        </div>
       {% endblock %}
+      <hr>
     </header>
+    <div class="main">
+      <div class = 'container'>
+        <nav>
+          {% block nav %}
+          <ul>
+            <li> <a href="/">Accueil</a></li>
+            <li><a href='{% url 'home' %}'>Blog</a></li>
+            <li> <a href="/contact">Contact</a></li>
+          </ul>
+          {% endblock %}
+        </nav>
 
-    <nav>
-      {% block nav %}
-      <ul>
-        <li> <a href="/">Accueil</a></li>
-        <li><a href='{% url 'home' %}'>Blog</a></li>
-        <li> <a href="/contact">Contact</a></li>
-      </ul>
-      {% endblock %}
-    </nav>
-
-    <section id='content'>
-      {% block content %}{% endblock %}
-    </section>
-
-    <footer style='position:static;bottom:15px;'>&copy; Crepes bretonnes</footer>
+        <section id='content'>
+          {% block content %}{% endblock %}
+        </section>
+      </div>
+      <footer >
+        <hr>
+        &copy; Crepes bretonnes
+      </footer>
+    </div>
   </body>
 </html>
