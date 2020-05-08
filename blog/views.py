@@ -4,26 +4,16 @@ from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
 
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
-from django.contrib.auth import authenticate, login, logout
 
 
 from datetime import datetime
 from blog.models import Article
 from .forms import ArticleForm, ContactForm, ConnexionForm
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 
 # def home(request):
 #     articles = Article.objects.all()
 #
 #     return render(request, 'blog/home.html.twig',locals())
-
-class CreateUser(CreateView):
-    model = User
-    form_class = UserCreationForm
-    success_url = reverse_lazy('home')
-    template_name = 'blog/user_form.html.twig'
-
 
 class DeleteArticle(DeleteView):
     model = Article
@@ -61,28 +51,6 @@ class ListArticle(ListView):
     model = Article
     context_object_name = 'articles'
     paginate_by = 5
-
-def login_user(request):
-    if request.method=='POST':
-        form = ConnexionForm(request.POST or None)
-
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username = username, password = password)
-
-            if user:
-                login(request, user)
-            else:
-                error = True
-    else:
-        form = ConnexionForm()
-
-    return render(request, 'blog/login_user.html.twig', locals())
-
-def logout_user(request):
-    logout(request)
-    return redirect('home')
 
 def article_form(request):
     form = ArticleForm(request.POST or None)
