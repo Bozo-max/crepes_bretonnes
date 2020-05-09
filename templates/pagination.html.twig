@@ -1,0 +1,8 @@
+{% if liste.has_previous %}
+<a href="{% url view liste.previous_page_number %}">Prédédent</a>
+{% endif %}
+Page {{liste.number}} sur {{liste.paginator.num_pages}}
+
+{% if liste.has_next %}
+<a href="{% url view liste.next_page_number %}">Suivant</a>
+{% endif %}

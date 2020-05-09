@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
+from django.contrib import messages
 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
-
+from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
+from django.core.paginator import Paginator, EmptyPage
 from datetime import datetime
 from blog.models import Article
 from .forms import ArticleForm, ContactForm, ConnexionForm
@@ -29,28 +33,42 @@ class DetailArticle(DetailView):
     model = Article
     template_name = 'blog/read.html.twig'
 
+def test_i18n(request):
+    nb_chats = 1
+    couleur = 'blanc'
+    chaine = _('Bonjour les nouveaux !')
+    ip = _('Votre ip est %s') % request.META['REMOTE_ADDR']
+    infos = ungettext('... et selon mes infos , vous avez %(nb)d chat %(col)s',
+        '... et selon mes infos , vous avez %(nb)d chats %(col)ss', nb_chats) % {'nb':nb_chats, 'col':couleur}
+    return render(request, 'blog/i18n.html.twig', locals())
 
-class CreateArticle(CreateView):
+class CreateArticle(SuccessMessageMixin, CreateView):
     model = Article
     form_class = ArticleForm
     template_name = 'blog/article_form.html.twig'
+    success_message = "L'article a bien été créé"
     success_url = reverse_lazy('home')
 
 class UpdateArticle(UpdateView):
     model = Article
     form_class = ArticleForm
     template_name = 'blog/article_form.html.twig'
+    success_message = "L'article a bien été mis à jour"
     success_url = reverse_lazy('home')
 
     def get_object(self, queryset = None):
         slug = self.kwargs['slug']
         return get_object_or_404(Article, slug = slug)
 
-class ListArticle(ListView):
+def listArticles(request, page = 1):
     template_name = 'blog/home.html.twig'
-    model = Article
-    context_object_name = 'articles'
-    paginate_by = 10
+    articles = Article.objects.order_by('-date')
+    pages = Paginator(articles, 5)
+    try:
+        articles = pages.page(page)
+    except EmptyPage:
+        articles = pages.page(pages.num_pages)
+    return render(request, 'blog/home.html.twig', locals())
 
 def article_form(request):
     form = ArticleForm(request.POST or None)

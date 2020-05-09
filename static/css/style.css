@@ -74,3 +74,13 @@ footer
   bottom: 1px;
   text-align: center;
 }
+
+.success
+{
+  text-align: center;
+  border: 1px solid green;
+  border-radius: 15px;
+  background-color: lightgreen;
+  color: green;
+  box-shadow: 0 0 5px green;
+}
