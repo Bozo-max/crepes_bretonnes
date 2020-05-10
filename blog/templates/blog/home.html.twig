@@ -8,17 +8,9 @@
 <p> <a href="{% url 'article_form' %}">Ajouter un article</a> </p>
 {% endif %}
 
-{% if messages %}
-    <ul class = "messages">
-      {% for message in messages %}
-        <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
-      {% endfor %}
-    </ul>
-{% endif %}
-
   {% for article in articles %}
     <article class="article">
-      <h2 class = 'article_title'> <strong>{{article.titre}}</strong> par {{article.auteur}} le <em>{{article.date|date:'DATE_FORMAT'}}</em> </h2>
+      <h2 class = 'article_title'> <strong>{{article.titre}}</strong> par {{article.auteur.username}} le <em>{{article.date|date:'DATE_FORMAT'}}</em> </h2>
       <div class = 'article_content'>{{article.content|truncatechars_html:80}} <a href="{% url 'article_by_slug' article.slug %}">Lire plus</a> </div>
     </article>
 

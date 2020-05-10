@@ -12,7 +12,7 @@ from django.utils.translation import ungettext
 from django.core.paginator import Paginator, EmptyPage
 from datetime import datetime
 from blog.models import Article
-from .forms import ArticleForm, ContactForm, ConnexionForm
+from .forms import ArticleForm
 from django.contrib.auth.decorators import permission_required
 
 # def home(request):
@@ -43,12 +43,24 @@ def test_i18n(request):
         '... et selon mes infos , vous avez %(nb)d chats %(col)ss', nb_chats) % {'nb':nb_chats, 'col':couleur}
     return render(request, 'blog/i18n.html.twig', locals())
 
-class CreateArticle(SuccessMessageMixin, CreateView):
-    model = Article
-    form_class = ArticleForm
-    template_name = 'blog/article_form.html.twig'
-    success_message = "L'article a bien été créé"
-    success_url = reverse_lazy('home')
+@permission_required('blog.add_article')
+def createArticle(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            a = Article(titre = cleaned_data['titre'],
+                        content= cleaned_data['content'],
+                        auteur = request.user,
+                        categorie = cleaned_data['categorie'])
+            a.save()
+            messages.success(request, 'L\'article "%s" a bien été ajouté !'%cleaned_data['titre'])
+            return redirect(reverse('article_by_slug', kwargs = {'slug':a.slug}))
+    form = ArticleForm(request.POST or None)
+    return render(request, 'blog/article_form.html.twig', locals())
+
+
+
 
 class UpdateArticle(UpdateView):
     model = Article
@@ -71,16 +83,6 @@ def listArticles(request, page = 1):
         articles = pages.page(pages.num_pages)
     return render(request, 'blog/home.html.twig', locals())
 
-def article_form(request):
-    form = ArticleForm(request.POST or None)
-
-    if form.is_valid():
-        article = form.save()
-        return redirect('article_by_slug',article.slug)
-
-    return render(request, 'blog/article_form.html.twig', locals())
-
-
 def read_article_by_slug(request, slug):
     article = get_object_or_404(Article, slug=slug)
     return render(request, 'blog/read.html.twig', {'article':article})
@@ -89,22 +91,3 @@ def read_article_by_slug(request, slug):
 def read_article(request, id):
     article = get_object_or_404(Article, id=id)
     return render(request, 'blog/read.html.twig', {'article':article})
-
-
-def current_date(request):
-    return render(request, 'blog/date.html.twig', {'date':datetime.now()})
-
-
-def addition(request, x, y):
-    res = x+y
-    return render(request, 'blog/addition.html.twig', locals())
-
-
-
-def contact_form(request):
-    form = ContactForm(request.POST or None, request.FILES)
-    sauvegarde = False
-    if form.is_valid():
-        form.save()
-        sauvegarde = True
-    return render(request, 'blog/contact_form.html.twig', locals())

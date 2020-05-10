@@ -15,6 +15,7 @@ class UserCreateForm(forms.Form):
         names = User.objects.values('username')
         if {'username':username} in names:
             raise forms.ValidationError('Ce pseudo est déja utilisé')
+        return username
 
     def clean(self):
         cleaned_data = super(UserCreateForm , self).clean()
@@ -27,4 +28,3 @@ class UserCreateForm(forms.Form):
 class LoginForm(forms.Form):
     pseudo = forms.CharField(label = 'Votre pseudo')
     password = forms.CharField(label = 'Votre mot de passe', widget = forms.PasswordInput)
-    

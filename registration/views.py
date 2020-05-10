@@ -16,9 +16,11 @@ def create_user(request):
                         email = cleaned_data['email'])
 
             user.set_password(cleaned_data['password'])
-            if cleaned_data['is_author']:
-                user.groups.add(Groups.get(name='author'))
             user.save()
+            if cleaned_data['is_author']:
+                user.groups.add(Group.objects.get(name='author'))
+            user.save()
+            messages.success(request, "Enregistrement réussi %s, vous pouvez vous connecter"%cleaned_data['pseudo'])
             return redirect('home')
     form = UserCreateForm(request.POST or None)
     return render(request, 'registration/register.html.twig', locals())

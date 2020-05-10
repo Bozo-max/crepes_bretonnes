@@ -3,11 +3,17 @@ from django.utils import timezone
 from datetime import datetime
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+
+def get_deleted_user():
+    return User.objects.get_or_create(username = 'deleted')[0]
+
 class Article(models.Model):
     titre = models.CharField(verbose_name = _("Titre de l'article"), max_length = 255)
-    auteur = models.CharField(verbose_name = _("Auteur"),max_length = 255)
+    auteur = models.ForeignKey(User, verbose_name = _("Auteur"), on_delete = models.SET(get_deleted_user))
     content = models.TextField(verbose_name = _("Contenu"),null = True)
     date = models.DateTimeField(default = timezone.now, verbose_name = _("Date de parution"))
     categorie = models.ForeignKey('Categorie', on_delete = models.CASCADE)
