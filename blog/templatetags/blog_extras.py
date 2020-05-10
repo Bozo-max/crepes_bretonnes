@@ -29,6 +29,11 @@ def smart_truncate(text,nb):
     else:
         return ' '.join(text.split(' ')[:-1])+'...'
 
+@register.filter
+def has_group(user, group_name):
+    return user.groups.filter(name = group_name).exists()
+
+
 # class RandomNode(template.Node):
 #     def __init__(self, begin, end):
 #         self.begin = begin

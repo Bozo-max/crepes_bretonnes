@@ -32,9 +32,13 @@
         <nav>
           {% block nav %}
           <ul>
-            <li> <a href="/">Accueil</a></li>
-            <li><a href='{% url 'home' %}'>Blog</a></li>
+            <li> <a href="{% url 'home' %}">Accueil</a></li>
             <li> <a href="/contact">Contact</a></li>
+            {% if user|has_group:'author' %}
+            <br>
+            <li> <a href=".">Vos articles</a></li>
+
+            {% endif %}
           </ul>
           {% endblock %}
         </nav>

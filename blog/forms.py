@@ -12,7 +12,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
-        exclude = ['slug', 'date']
+        exclude = ['slug', 'date', 'author']
 
 class UserForm(forms.ModelForm):
     class Meta:

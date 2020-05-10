@@ -22,6 +22,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.titre
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.slug = slugify("%d-%s"%(self.id, self.titre))

@@ -7,8 +7,12 @@
 </article>
 
 <p>
-<a href="{% url 'article_update' article.slug %}">Modifier</a>
 <a href="{% url 'home' %}">Retour aux articles</a>
+{% if perms.blog.change_article %}
+<a href="{% url 'article_update' article.slug %}">Modifier</a>
+{% endif %}
+{% if perms.blog.delete_article %}
 <a href="{% url 'delete_article' article.slug %}">Supprimer</a>
+{% endif %}
 </p>
 {% endblock %}
