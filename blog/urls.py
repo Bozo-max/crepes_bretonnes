@@ -5,8 +5,7 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 from .models import Article
-from .views import UpdateArticle, \
-    DetailArticle, DeleteArticle
+from .views import DetailArticle, DeleteArticle
 
 urlpatterns = [
 #    path('home', views.home, name = 'home'),
@@ -17,5 +16,5 @@ urlpatterns = [
     path('article/<slug:slug>', DetailArticle.as_view(), name = 'article_by_slug'),
     path('delete/<slug:slug>', permission_required('blog.delete_article')(DeleteArticle.as_view()), name = 'delete_article'),
     path('add', views.createArticle, name = 'article_form'),
-    path('update/<slug:slug>', UpdateArticle.as_view(), name = 'article_update'),
+    path('update/<slug:slug>', views.updateArticle, name = 'article_update'),
 ]
