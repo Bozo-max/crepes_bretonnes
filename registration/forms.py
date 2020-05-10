@@ -23,3 +23,8 @@ class UserCreateForm(forms.Form):
             self.add_error('password', 'Les mots des passe sont différents')
 
         return cleaned_data
+
+class LoginForm(forms.Form):
+    pseudo = forms.CharField(label = 'Votre pseudo')
+    password = forms.CharField(label = 'Votre mot de passe', widget = forms.PasswordInput)
+    

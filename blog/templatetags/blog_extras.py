@@ -31,7 +31,8 @@ def smart_truncate(text,nb):
 
 @register.filter
 def has_group(user, group_name):
-    return user.groups.filter(name = group_name).exists()
+
+    return bool(user) and user.groups.filter(name = group_name).exists()
 
 
 # class RandomNode(template.Node):

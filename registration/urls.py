@@ -4,6 +4,6 @@ from .import views
 
 urlpatterns = [
     path('register', views.create_user, name = 'register'),
-    path('login', auth_views.LoginView.as_view(template_name='registration/login.html.twig'), name = 'login'),
+    path('login', views.login_user, name = 'login'),
     path('logout', auth_views.LogoutView.as_view(template_name='registration/logout.html.twig'), name = 'logout'),
 ]

@@ -2,7 +2,8 @@
 
 {% block content %}
 <h1> Se connecter : </h1>
-{% if user.is_authenticated %} Bienvenue {{user.username}}{% endif %}
+{% if error %}L'identifiant ou le mot de passe entré n'est pas bon{% endif %}
+{% if user.is_authenticated %} Vous êtes connecté {{user.username}}{% endif %}
 <form class="" action="" method="post">
     {% if error %}{{error}}{% endif %}
     {% csrf_token %}
