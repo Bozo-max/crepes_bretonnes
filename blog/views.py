@@ -98,8 +98,8 @@ def updateArticle(request, slug):
         return render(request, 'blog/article_form.html.twig', locals())
     else:
         raise PermissionDenied
+
 def listArticles(request, page = 1):
-    template_name = 'blog/home.html.twig'
     articles = Article.objects.order_by('-date')
     pages = Paginator(articles, 5)
     try:
@@ -107,6 +107,17 @@ def listArticles(request, page = 1):
     except EmptyPage:
         articles = pages.page(pages.num_pages)
     return render(request, 'blog/home.html.twig', locals())
+
+def userArticles(request, page = 1):
+    articles = Article.objects.filter(auteur=request.user).order_by('-date')
+    pages = Paginator(articles, 5)
+    try:
+        articles = pages.page(page)
+    except EmptyPage:
+        articles = pages.page(pages.num_pages)
+    return render(request, 'blog/home.html.twig', locals())
+
+
 
 def read_article_by_slug(request, slug):
     article = get_object_or_404(Article, slug=slug)

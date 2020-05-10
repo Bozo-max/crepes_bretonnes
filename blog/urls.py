@@ -11,6 +11,7 @@ urlpatterns = [
 #    path('home', views.home, name = 'home'),
     path('test_i18n', views.test_i18n, name = 'test_i18n'),
     path('home/', views.listArticles, name = 'home'),
+    path('home/myarticles', views.userArticles, name = 'my_articles'),
     path('home/<int:page>', views.listArticles, name = 'home_page'),
     path('article/<int:id>', views.read_article, name = 'display_article'),
     path('article/<slug:slug>', DetailArticle.as_view(), name = 'article_by_slug'),

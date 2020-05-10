@@ -36,7 +36,7 @@
             <li> <a href="/contact">Contact</a></li>
             {% if user|has_group:'author' %}
             <br>
-            <li> <a href=".">Vos articles</a></li>
+            <li> <a href="{% url 'my_articles' %}">Vos articles</a></li>
 
             {% endif %}
           </ul>
