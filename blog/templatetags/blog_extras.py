@@ -13,6 +13,10 @@ def citation(texte):
     return mark_safe(res)
 
 @register.filter
+def add_id(texte, id):
+    return str(texte)+str(id)
+
+@register.filter
 def smart_truncate(text,nb):
     try:
         nb = int(nb)

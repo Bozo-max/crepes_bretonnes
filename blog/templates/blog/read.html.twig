@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
-
+{% load blog_extras %}
 {% block content %}
 <article class="article">
 <h1 class="article_title"><strong>{{article.titre}}</strong> par {{article.auteur.username}} le <em>{{article.date|date:'DATE_FORMAT'}}</em></h1>
 <p class = "article_content">{{article.content}}</p>
 </article>
-
 <p>
 <a href="{% url 'home' %}">Retour aux articles</a>
-{% if perms.blog.change_article %}
-<a href="{% url 'article_update' article.slug %}">Modifier</a>
+{% if 'blog.change_article_'|add_id:article.id in perms %}
+  <a href="{% url 'article_update' article.slug %}">Modifier</a>
 {% endif %}
-{% if perms.blog.delete_article %}
-<a href="{% url 'delete_article' article.slug %}">Supprimer</a>
-{% endif %}
+{% if 'blog.delete_article_'|add_id:article.id in perms %}
+  <a href="{% url 'delete_article' article.slug %}">Supprimer</a>
+  {% endif %}
 </p>
 {% endblock %}
