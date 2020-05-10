@@ -13,6 +13,7 @@ from django.core.paginator import Paginator, EmptyPage
 from datetime import datetime
 from blog.models import Article
 from .forms import ArticleForm, ContactForm, ConnexionForm
+from django.contrib.auth.decorators import permission_required
 
 # def home(request):
 #     articles = Article.objects.all()
