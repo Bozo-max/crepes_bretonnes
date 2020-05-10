@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,6 +16,9 @@ class Article(models.Model):
     class Meta:
         verbose_name = _("Article")
         ordering = ['-date']
+
+    def is_recent(self):
+        return (datetime.now()-self.date).days<30 and self.date<datetime.now()
 
     def __str__(self):
         return self.titre

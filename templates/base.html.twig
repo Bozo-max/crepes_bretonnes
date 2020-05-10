@@ -2,22 +2,26 @@
 {% load blog_extras %}
 {% load static %}
 {% load i18n %}
-<html lang="fr" dir="ltr">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Les crepes bretonnes{% endblock %}</title>
+    <title>{% block title %}{% blocktrans %}Les crepes bretonnes{% endblocktrans %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/blog.css" %}">
   </head>
   <body>
     <header>
       {% block header %}
-        <h1 class = "main_title">Crêpes Bretonnes</h1>
+        <h1 class = "main_title">{% blocktrans %}Crêpes Bretonnes{% endblocktrans %}</h1>
         <div class="login_logout">
           {% if user.is_authenticated %}
-            Connecté en tant que {{user.username}} <br> <a href="{% url 'logout' %}">Se déconnecter</a>
+            {% blocktrans with username=user.username %}
+              Connecté en tant que {{username}} <br>
+            {% endblocktrans %}
+
+            <a href="{% url 'logout' %}">{% blocktrans %}Se déconnecter{% endblocktrans %}</a>
           {% else %}
-            <a href="{% url 'register' %}">S'inscrire</a> <a href="{% url 'login' %}">Se connecter</a>
+            <a href="{% url 'register' %}">{% blocktrans %}S'inscrire{% endblocktrans %}</a> <a href="{% url 'login' %}">{% blocktrans %}Se connecter{% endblocktrans %}</a>
           {% endif %}
         </div>
       {% endblock %}

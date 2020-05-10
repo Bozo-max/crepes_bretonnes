@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-09 21:15+0200\n"
+"POT-Creation-Date: 2020-05-10 10:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "Content"
 
 #: .\blog\models.py:11
 msgid "Date de parution"
-msgstr "Creation date"
+msgstr "Parution date"
 
 #: .\blog\models.py:16
 msgid "Article"
@@ -39,7 +39,7 @@ msgstr "Article"
 
 #: .\blog\views.py:39
 msgid "Bonjour les nouveaux !"
-msgstr "Hello new comers !"
+msgstr "Hello newbies !"
 
 #: .\blog\views.py:40
 #, python-format
@@ -50,5 +50,5 @@ msgstr "Your ip is %s"
 #, python-format
 msgid "... et selon mes infos , vous avez %(nb)d chat %(col)s"
 msgid_plural "... et selon mes infos , vous avez %(nb)d chats %(col)ss"
-msgstr[0] "... and according to what I know ; you have %(nb)d %(col)s cat"
-msgstr[1] "... and according to what I know ; you have %(nb)d %(col)s cats"
+msgstr[0] "... and by my infos, you have %(nb)d %(col)s cat"
+msgstr[1] "... and by my infos, you have %(nb)d %(col)s cats"

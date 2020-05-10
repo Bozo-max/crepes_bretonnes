@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% load i18n %}
+
 {% block content %}
 
 <p> <a href="{% url 'article_form' %}">Ajouter un article</a> </p>
@@ -25,6 +27,6 @@
     <p>Pas encore d'article</p>
   {% endfor %}
   <br><br>
-  {% include 'pagination.html.twig' with liste=articles view='home' %}
+  {% include 'pagination.html.twig' with liste=articles view='home_page' %}
 
 {% endblock %}

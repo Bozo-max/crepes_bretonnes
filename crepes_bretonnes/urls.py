@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),
     path('login/', include('registration.urls')),
+#    path('i18n/', include('django.conf.urls.i18n')),
+    path('lang', lambda request : render(request, 'change_language.html.twig'), name = 'change_language'),
 ]
+
+urlpatterns += i18n_patterns(
+    path('blog/', include('blog.urls')),
+    )

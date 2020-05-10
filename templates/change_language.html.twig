@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<h1>Changer de langue</h1>
+
+<form class="" action="/i18n/setlang/" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{% url 'home' %}">
+  <select class="" name="Language">
+    {% for lang in LANGUAGES %}
+      <option value="{{lang.0}}">{{lang.1}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" name="" value="Submit">
+
+</form>
